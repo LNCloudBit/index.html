@@ -3,269 +3,293 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Endividômetro | Diagnóstico Financeiro Gratuito</title>
+  <title>Endividômetro | Diagnóstico Financeiro por Lucas Neves</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              dark: '#090d16',
+              navy: '#0f172a',
+              gold: '#f59e0b',
+              goldHover: '#d97706',
+            }
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .pointer-transition { transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .needle-transition {
+      transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: 200px 200px;
+    }
+    .option-card {
+      transition: all 0.2s ease-in-out;
+    }
+    .option-card:hover {
+      transform: translateY(-2px);
+    }
+    @keyframes pulse-subtle {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+    .animate-pulse-subtle {
+      animation: pulse-subtle 3s infinite ease-in-out;
+    }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between antialiased selection:bg-amber-500 selection:text-slate-950">
 
-  <!-- CONFIGURAÇÃO DO SEU LINK DE VENDAS -->
+  <!-- CONFIGURAÇÃO DO SEU LINK DE VENDAS KIWIFY -->
   <script>
     const CHECKOUT_URL = "https://pay.kiwify.com.br/ifnEqhf";
   </script>
 
   <!-- NAVBAR / HEADER -->
-  <header class="border-b border-slate-800 bg-slate-900/60 backdrop-blur-md sticky top-0 z-50">
-    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center font-black text-slate-950 shadow-lg shadow-amber-500/20 text-xl">
-          %
+  <header class="border-b border-slate-800/80 bg-slate-900/70 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-4 py-3.5 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-amber-500/20">
+          <i class="fa-solid fa-gauge-high"></i>
         </div>
         <div>
-          <h1 class="font-bold text-lg leading-tight tracking-tight text-white">ENDIVIDÔMETRO</h1>
-          <p class="text-xs text-amber-400 font-medium">Por Lucas Neves</p>
+          <span class="font-extrabold text-lg tracking-tight text-white block leading-none">ENDIVIDÔMETRO</span>
+          <span class="text-xs text-amber-400 font-semibold">por Lucas Neves</span>
         </div>
       </div>
-      <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300">
-        Diagnóstico Gratuito
+      <span class="text-xs font-semibold px-3.5 py-1.5 rounded-full bg-slate-800/90 border border-slate-700 text-slate-300">
+        <i class="fa-solid fa-circle-check text-amber-400 mr-1.5"></i> Diagnóstico Gratuito
       </span>
     </div>
   </header>
 
-  <main class="max-w-4xl mx-auto px-4 py-8 md:py-12 flex-grow w-full">
+  <!-- MAIN CONTAINER -->
+  <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-8 sm:py-12">
 
     <!-- HERO INTRO -->
     <div id="hero-section" class="text-center mb-10 max-w-2xl mx-auto">
-      <span class="inline-block px-4 py-1.5 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-4 uppercase tracking-wider">
+      <span class="inline-block px-3.5 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-400 text-xs font-bold uppercase tracking-wider mb-4">
         Teste Prático de Sufoco Financeiro
       </span>
-      <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">
-        Descubra o nível real de <span class="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">estresse do seu bolso</span> em 1 minuto
-      </h2>
-      <p class="text-slate-400 text-base leading-relaxed">
-        Responda a 4 perguntas simples e receba um diagnóstico cirúrgico sobre a sua saúde financeira atual, sem julgamentos e com plano de ação.
+      <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4 leading-tight">
+        Qual é o seu nível de <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-300 to-orange-400">sufoco financeiro</span> hoje?
+      </h1>
+      <p class="text-slate-300 text-base sm:text-lg mb-8 leading-relaxed">
+        Responda a 4 perguntas objetivas e descubra a nota do seu <strong>Endividômetro</strong> (de 0 a 10). Sem economês e sem julgamentos morais.
       </p>
+      <button onclick="startQuiz()" class="inline-flex items-center justify-center bg-gradient-to-r from-amber-500 via-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-lg px-8 py-4 rounded-2xl shadow-xl shadow-amber-500/25 transition transform active:scale-95 cursor-pointer">
+        <span>Calcular meu Endividômetro</span>
+        <i class="fa-solid fa-arrow-right ml-3"></i>
+      </button>
     </div>
 
-    <!-- QUIZ CONTAINER -->
-    <div id="quiz-container" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
-      
+    <!-- CARD DO QUIZ -->
+    <div id="quiz-card" class="hidden bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden backdrop-blur">
       <!-- Barra de Progresso -->
       <div class="mb-8">
-        <div class="flex justify-between items-center mb-2 text-xs font-semibold text-slate-400">
-          <span>Progresso do Diagnóstico</span>
-          <span id="progress-text">Pergunta 1 de 4</span>
+        <div class="flex justify-between items-center text-xs font-semibold text-slate-400 mb-2">
+          <span id="progress-step-text">Pergunta 1 de 4</span>
+          <span id="progress-percent-text">25%</span>
         </div>
-        <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-          <div id="progress-bar" class="bg-amber-500 h-full w-1/4 transition-all duration-300"></div>
+        <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+          <div id="progress-bar" class="bg-gradient-to-r from-amber-500 to-amber-300 h-full w-1/4 transition-all duration-300"></div>
         </div>
       </div>
 
-      <!-- PERGUNTAS -->
-      <form id="quiz-form" onsubmit="return false;">
-        
-        <!-- Pergunta 1 -->
-        <div class="quiz-step block" data-step="1">
-          <h3 class="text-xl font-bold text-white mb-2">1. Como você lida com as faturas do cartão de crédito ou dívidas bancárias?</h3>
-          <p class="text-slate-400 text-sm mb-6">Seja sincero com a sua rotina atual.</p>
-          <div class="space-y-3">
-            <label class="option-card flex items-center p-4 rounded-xl border border-slate-800 bg-slate-950/50 hover:border-amber-500/50 hover:bg-slate-800/50 cursor-pointer transition-all">
-              <input type="radio" name="q1" value="1" class="w-5 h-5 text-amber-500 focus:ring-amber-500 bg-slate-900 border-slate-700">
-              <span class="ml-3 text-slate-200 font-medium">Pago tudo em dia e não rolo juros no rotativo.</span>
-            </label>
-            <label class="option-card flex items-center p-4 rounded-xl border border-slate-800 bg-slate-950/50 hover:border-amber-500/50 hover:bg-slate-800/50 cursor-pointer transition-all">
-              <input type="radio" name="q1" value="2.5" class="w-5 h-5 text-amber-500 focus:ring-amber-500 bg-slate-900 border-slate-700">
-              <span class="ml-3 text-slate-200 font-medium">Consigo pagar o mínimo ou parcelar, mas o valor me aperta.</span>
-            </label>
-            <label class="option-card flex items-center p-4 rounded-xl border border-slate-800 bg-slate-950/50 hover:border-amber-500/50 hover:bg-slate-800/50 cursor-pointer transition-all">
-              <input type="radio" name="q1" value="4" class="w-5 h-5 text-amber-500 focus:ring-amber-500 bg-slate-900 border-slate-700">
-              <span class="ml-3 text-slate-200 font-medium">Tenho faturas/contas já atrasadas e virando uma bola de neve.</span>
-            </label>
-          </div>
-        </div>
+      <!-- Container da Pergunta -->
+      <div id="question-container">
+        <h2 id="question-title" class="text-xl sm:text-2xl font-bold text-white mb-2"></h2>
+        <p id="question-subtitle" class="text-sm text-slate-400 mb-6"></p>
 
-        <!-- Pergunta 2 -->
-        <div class="quiz-step hidden" data-step="2">
-          <h3 class="text-xl font-bold text-white mb-2">2. Se acontecer um imprevisto hoje (carro quebrar, urgência médica), o que acontece?</h3>
-          <p class="text-slate-400 text-sm mb-6">Qual é a sua capacidade de resposta a emergências?</p>
-          <div class="space-y-3">
-            <label class="option-card flex items-center p-4 rounded-xl border border-slate-800 bg-slate-950/50 hover:border-amber-500/50 hover:bg-slate-800/50 cursor-pointer transition-all">
-              <input type="radio" name="q2" value="0.5" class="w-5 h-5 text-amber-500 focus:ring-amber-500 bg-slate-900 border-slate-700">
-              <span class="ml-3 text-slate-200 font-medium">Tenho uma caixinha/reserva guardada com liquidez para cobrir.</span>
-            </label>
-            <label class="option-card flex items-center p-4 rounded-xl border border-slate-800 bg-slate-950/50 hover:border-amber-500/50 hover:bg-slate-800/50 cursor-pointer transition-all">
-              <input type="radio" name="q2" value="1.5" class="w-5 h-5 text-amber-500 focus:ring-amber-500 bg-slate-900 border-slate-700">
-              <span class="ml-3 text-slate-200 font-medium">Preciso me desdobrar, mas consigo pagar sem entrar em dívida pesada.</span>
-            </label>
-            <label class="option-card flex items-center p-4 rounded-xl border border-slate-800 bg-slate-950/50 hover:border-amber-500/50 hover:bg-slate-800/50 cursor-pointer transition-all">
-              <input type="radio" name="q2" value="2.5" class="w-5 h-5 text-amber-500 focus:ring-amber-500 bg-slate-900 border-slate-700">
-              <span class="ml-3 text-slate-200 font-medium">Sufoco total: teria que recorrer a empréstimos ou cheque especial.</span>
-            </label>
-          </div>
-        </div>
+        <!-- Opções -->
+        <div id="options-container" class="space-y-3"></div>
+      </div>
 
-        <!-- Pergunta 3 -->
-        <div class="quiz-step hidden" data-step="3">
-          <h3 class="text-xl font-bold text-white mb-2">3. Como fica a sua conta bancária por volta do dia 15 ou 20 do mês?</h3>
-          <p class="text-slate-400 text-sm mb-6">Medindo a folga do seu orçamento.</p>
-          <div class="space-y-3">
-            <label class="option-card flex items-center p-4 rounded-xl border border-slate-800 bg-slate-950/50 hover:border-amber-500/50 hover:bg-slate-800/50 cursor-pointer transition-all">
-              <input type="radio" name="q3" value="0.5" class="w-5 h-5 text-amber-500 focus:ring-amber-500 bg-slate-900 border-slate-700">
-              <span class="ml-3 text-slate-200 font-medium">Ainda sobra margem confortável e separo uma parte para investir.</span>
-            </label>
-            <label class="option-card flex items-center p-4 rounded-xl border border-slate-800 bg-slate-950/50 hover:border-amber-500/50 hover:bg-slate-800/50 cursor-pointer transition-all">
-              <input type="radio" name="q3" value="1.5" class="w-5 h-5 text-amber-500 focus:ring-amber-500 bg-slate-900 border-slate-700">
-              <span class="ml-3 text-slate-200 font-medium">Fica "no zero a zero", conto os centavos até o próximo pagamento.</span>
-            </label>
-            <label class="option-card flex items-center p-4 rounded-xl border border-slate-800 bg-slate-950/50 hover:border-amber-500/50 hover:bg-slate-800/50 cursor-pointer transition-all">
-              <input type="radio" name="q3" value="2" class="w-5 h-5 text-amber-500 focus:ring-amber-500 bg-slate-900 border-slate-700">
-              <span class="ml-3 text-slate-200 font-medium">Fica no vermelho, preciso usar o limite do cheque especial.</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Pergunta 4 -->
-        <div class="quiz-step hidden" data-step="4">
-          <h3 class="text-xl font-bold text-white mb-2">4. Qual a sua sensação emocional em relação ao dinheiro hoje?</h3>
-          <p class="text-slate-400 text-sm mb-6">O peso psicológico na sua rotina.</p>
-          <div class="space-y-3">
-            <label class="option-card flex items-center p-4 rounded-xl border border-slate-800 bg-slate-950/50 hover:border-amber-500/50 hover:bg-slate-800/50 cursor-pointer transition-all">
-              <input type="radio" name="q4" value="0" class="w-5 h-5 text-amber-500 focus:ring-amber-500 bg-slate-900 border-slate-700">
-              <span class="ml-3 text-slate-200 font-medium">Tranquilo, sinto que tenho o controle dos meus gastos.</span>
-            </label>
-            <label class="option-card flex items-center p-4 rounded-xl border border-slate-800 bg-slate-950/50 hover:border-amber-500/50 hover:bg-slate-800/50 cursor-pointer transition-all">
-              <input type="radio" name="q4" value="1" class="w-5 h-5 text-amber-500 focus:ring-amber-500 bg-slate-900 border-slate-700">
-              <span class="ml-3 text-slate-200 font-medium">Ansioso, sinto que trabalho duro mas o dinheiro escorre pelas mãos.</span>
-            </label>
-            <label class="option-card flex items-center p-4 rounded-xl border border-slate-800 bg-slate-950/50 hover:border-amber-500/50 hover:bg-slate-800/50 cursor-pointer transition-all">
-              <input type="radio" name="q4" value="1.5" class="w-5 h-5 text-amber-500 focus:ring-amber-500 bg-slate-900 border-slate-700">
-              <span class="ml-3 text-slate-200 font-medium">Exausto, evito até olhar a conta bancária para não passar raiva.</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Botões de Navegação -->
-        <div class="flex justify-between items-center mt-8 pt-6 border-t border-slate-800">
-          <button type="button" id="prev-btn" class="px-5 py-2.5 rounded-xl border border-slate-700 text-slate-400 hover:text-white hover:bg-slate-800 font-medium text-sm disabled:opacity-40" disabled>
-            Anterior
-          </button>
-          <button type="button" id="next-btn" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/20">
-            Próxima Pergunta
-          </button>
-        </div>
-
-      </form>
+      <!-- Navegação -->
+      <div class="mt-8 pt-4 border-t border-slate-800/80 flex justify-between items-center">
+        <button id="prev-btn" onclick="previousQuestion()" class="invisible inline-flex items-center text-sm font-semibold text-slate-400 hover:text-white transition py-2 px-4 cursor-pointer">
+          <i class="fa-solid fa-arrow-left mr-2"></i> Voltar
+        </button>
+        <span class="text-xs text-slate-500 italic">Escolha a opção mais realista para você</span>
+      </div>
     </div>
 
-    <!-- TELA DE RESULTADO DO ENDIVIDÔMETRO -->
-    <div id="result-container" class="hidden space-y-8">
+    <!-- TELA DE RESULTADO -->
+    <div id="result-card" class="hidden space-y-8">
       
       <!-- CARD DO VELOCÍMETRO -->
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-10 text-center relative overflow-hidden">
-        <h3 class="text-xs font-bold text-amber-400 uppercase tracking-widest mb-1">Resultado do Seu Diagnóstico</h3>
-        <h4 class="text-2xl font-extrabold text-white mb-6">SEU NÍVEL NO ENDIVIDÔMETRO</h4>
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl text-center relative overflow-hidden">
+        <div class="absolute -top-24 -left-24 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <h2 class="text-xs font-extrabold uppercase tracking-widest text-amber-400 mb-1">Seu Resultado no Endividômetro</h2>
+        <p class="text-slate-400 text-xs sm:text-sm mb-6">Diagnóstico em tempo real com base no seu padrão financeiro atual</p>
 
-        <!-- VELOCÍMETRO SVG COM BLOCOS E APENAS 0 E 10 -->
-        <div class="relative w-full max-w-sm mx-auto h-56 flex flex-col items-center justify-end">
+        <!-- VELOCÍMETRO SVG COM BLOCOS SEGMENTADOS & APENAS NÚMEROS 0 E 10 -->
+        <div class="relative w-full max-w-xs sm:max-w-sm mx-auto h-52 sm:h-60 flex flex-col items-center justify-end">
           <svg viewBox="0 0 400 240" class="w-full h-full overflow-visible">
             
-            <!-- BLOCO VERDE (0 a 4) -->
-            <path d="M 40,200 A 160,160 0 0,1 145,50" fill="none" stroke="#22c55e" stroke-width="32" stroke-linecap="butt" />
-            <!-- BLOCO AMARELO (5 a 7) -->
-            <path d="M 160,43 A 160,160 0 0,1 275,54" fill="none" stroke="#eab308" stroke-width="32" stroke-linecap="butt" />
-            <!-- BLOCO VERMELHO (8 a 10) -->
-            <path d="M 292,62 A 160,160 0 0,1 360,200" fill="none" stroke="#ef4444" stroke-width="32" stroke-linecap="butt" />
+            <!-- BLOCOS VERDES (0 a 4) -->
+            <path d="M 40,200 A 160,160 0 0,1 55.4,145.3" fill="none" stroke="#22c55e" stroke-width="34" stroke-linecap="butt" />
+            <path d="M 59.4,138 A 160,160 0 0,1 86.8,93.6" fill="none" stroke="#22c55e" stroke-width="34" stroke-linecap="butt" />
+            <path d="M 92.2,87.2 A 160,160 0 0,1 129.4,56.6" fill="none" stroke="#22c55e" stroke-width="34" stroke-linecap="butt" />
 
-            <!-- NÚMEROS 0 E 10 NAS EXTREMIDADES -->
-            <text x="35" y="225" font-size="18" font-weight="800" fill="#22c55e" text-anchor="middle">0</text>
-            <text x="365" y="225" font-size="18" font-weight="800" fill="#ef4444" text-anchor="middle">10</text>
+            <!-- BLOCOS AMARELOS (5 a 7) -->
+            <path d="M 136.2,52 A 160,160 0 0,1 180.2,41" fill="none" stroke="#eab308" stroke-width="34" stroke-linecap="butt" />
+            <path d="M 188.2,40.4 A 160,160 0 0,1 232.8,44" fill="none" stroke="#eab308" stroke-width="34" stroke-linecap="butt" />
+            <path d="M 240.2,46.5 A 160,160 0 0,1 282,65" fill="none" stroke="#eab308" stroke-width="34" stroke-linecap="butt" />
 
-            <!-- PONTEIRO E BASE CENTRAL -->
-            <g id="gauge-pointer" class="pointer-transition" style="transform-origin: 200px 200px; transform: rotate(-90deg);">
-              <polygon points="194,200 200,45 206,200" fill="#1e293b" stroke="#090d16" stroke-width="2" />
-              <circle cx="200" cy="200" r="22" fill="#1e293b" stroke="#0f172a" stroke-width="3" />
-              <circle cx="200" cy="200" r="10" fill="#ef4444" />
+            <!-- BLOCOS VERMELHOS (8 a 10) -->
+            <path d="M 288.6,69.5 A 160,160 0 0,1 323,103.5" fill="none" stroke="#ef4444" stroke-width="34" stroke-linecap="butt" />
+            <path d="M 328,110 A 160,160 0 0,1 350.5,152" fill="none" stroke="#ef4444" stroke-width="34" stroke-linecap="butt" />
+            <path d="M 353.5,160 A 160,160 0 0,1 360,200" fill="none" stroke="#ef4444" stroke-width="34" stroke-linecap="butt" />
+
+            <!-- NÚMEROS APENAS NAS PONTA EXTREMAS: 0 (Verde) e 10 (Vermelho) -->
+            <text x="40" y="232" font-size="20" font-weight="900" fill="#22c55e" text-anchor="middle">0</text>
+            <text x="360" y="232" font-size="20" font-weight="900" fill="#ef4444" text-anchor="middle">10</text>
+
+            <!-- PONTEIRO E BASE CENTRAL (Giro exato de -90deg a +90deg) -->
+            <g id="needle" class="needle-transition" style="transform: rotate(-90deg);">
+              <polygon points="195,200 200,45 205,200" fill="#0f172a" stroke="#ffffff" stroke-width="1.5"/>
+              <circle cx="200" cy="200" r="20" fill="#0f172a" stroke="#ffffff" stroke-width="3"/>
+              <circle cx="200" cy="200" r="8" fill="#ef4444"/>
             </g>
           </svg>
         </div>
 
-        <!-- NOTA DIGITAL E BADGE -->
-        <div class="mt-4">
-          <div class="text-4xl font-black text-white" id="score-display">0 <span class="text-lg font-bold text-slate-500">/ 10</span></div>
-          <div id="status-badge" class="inline-block mt-2 px-4 py-1.5 rounded-full font-bold text-sm">
-            Calculando...
-          </div>
+        <!-- NOTA DIGITAL DA FEBRE -->
+        <div class="mt-4 mb-3">
+          <span id="score-number" class="text-4xl sm:text-5xl font-black text-white">0</span>
+          <span class="text-lg font-bold text-slate-400"> / 10</span>
+        </div>
+
+        <!-- BADGE DE NÍVEL -->
+        <div id="status-badge" class="inline-block px-5 py-2 rounded-full font-bold text-sm mb-6 shadow-sm">
+          Calculando...
+        </div>
+
+        <!-- DIAGNÓSTICO TEXTUAL DETALHADO -->
+        <div id="diagnosis-text-container" class="bg-slate-950/80 rounded-2xl p-5 border border-slate-800 max-w-2xl mx-auto text-left space-y-3">
+          <h3 id="diagnosis-title" class="font-bold text-base text-white flex items-center"></h3>
+          <p id="diagnosis-description" class="text-sm text-slate-300 leading-relaxed"></p>
+        </div>
+
+        <!-- CONSELHO CIRÚRGICO / AÇÃO OBRIGATÓRIA -->
+        <div class="mt-6 text-left max-w-2xl mx-auto bg-amber-500/10 border border-amber-500/30 rounded-2xl p-5">
+          <h4 class="font-extrabold text-xs uppercase tracking-wider text-amber-400 mb-1 flex items-center">
+            <i class="fa-solid fa-bolt-lightning mr-2"></i> Primeiro Passo Obrigatório
+          </h4>
+          <p id="action-advice" class="text-sm text-slate-200 leading-relaxed font-medium"></p>
+        </div>
+
+        <div class="mt-6">
+          <button onclick="restartQuiz()" class="text-xs text-slate-400 hover:text-white underline transition cursor-pointer">
+            <i class="fa-solid fa-rotate-right mr-1"></i> Refazer o teste
+          </button>
         </div>
       </div>
 
-      <!-- DIAGNÓSTICO DETALHADO -->
-      <div id="diagnosis-card" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 space-y-4">
-        <!-- Preenchido dinamicamente via JS -->
-      </div>
-
-      <!-- PITCH DO LIVRO COM A CAPA OFICIAL (LUCAS NEVES) -->
-      <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-amber-950/40 border border-amber-500/30 rounded-3xl p-6 md:p-10">
-        <div class="grid md:grid-cols-12 gap-8 items-center">
+      <!-- BLOCO DE OFERTA DO LIVRO COM A CAPA OFICIAL -->
+      <div id="livro-secao" class="bg-gradient-to-b from-slate-900 to-slate-900/90 border border-amber-500/30 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           
-          <!-- Capa Estilizada do Livro (Lucas Neves) -->
+          <!-- Lado Esquerdo: Capa do Livro Ilustrada idêntica à oficial -->
           <div class="md:col-span-5 flex justify-center">
             <div class="relative group">
-              <div class="absolute -inset-1 bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
-              <div class="relative w-64 h-96 rounded-2xl shadow-2xl border border-amber-500/40 bg-gradient-to-b from-[#162a42] to-[#0f1d2e] p-6 flex flex-col justify-between text-center overflow-hidden">
-                <div class="absolute -right-10 -top-10 w-32 h-32 bg-amber-500/10 rounded-full blur-xl"></div>
-                <div>
-                  <span class="text-[10px] font-extrabold tracking-widest text-amber-400 uppercase">GUIA PRÁTICO</span>
-                  <h4 class="text-xl font-extrabold text-white leading-tight mt-1">ENDIVIDADO,<br><span class="text-amber-400">PORÉM</span><br>INVESTINDO</h4>
+              <!-- Glow de Fundo -->
+              <div class="absolute -inset-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-500"></div>
+              
+              <!-- Renderização Fiel da Capa "Endividado, Porém Investindo" por Lucas Neves -->
+              <div class="relative w-64 sm:w-72 bg-[#1b324b] border-4 border-[#c98e4d] rounded-2xl p-5 shadow-2xl flex flex-col justify-between text-center overflow-hidden">
+                <!-- Título e Subtítulo -->
+                <div class="space-y-1 z-10">
+                  <h3 class="text-2xl font-black text-white tracking-wider leading-none">ENDIVIDADO,</h3>
+                  <div class="text-amber-400 text-xs font-black tracking-widest uppercase py-0.5">PORÉM</div>
+                  <h3 class="text-2xl font-black text-white tracking-wider leading-none">INVESTINDO</h3>
+                  <p class="text-[10px] text-slate-200 mt-2 leading-tight px-1 font-medium">
+                    Um guia prático (e sem ilusões) para quem trabalha duro, quer sair do sufoco e começar a ver o dinheiro sobrar.
+                  </p>
                 </div>
-                <div class="my-auto py-2">
-                  <div class="w-16 h-16 mx-auto rounded-full bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 text-2xl font-black shadow-inner">
-                    $
+
+                <!-- Ilustrações Vetoriais da Capa -->
+                <div class="my-4 py-3 px-2 bg-[#254261]/80 rounded-xl border border-amber-500/20 relative flex flex-col items-center justify-center space-y-2">
+                  <div class="flex items-center justify-around w-full">
+                    <!-- Porquinho de Moedas -->
+                    <div class="text-emerald-400 text-3xl">
+                      <i class="fa-solid fa-piggy-bank"></i>
+                    </div>
+                    <!-- Gráfico de Crescimento -->
+                    <div class="text-amber-400 text-3xl">
+                      <i class="fa-solid fa-chart-line"></i>
+                    </div>
                   </div>
-                  <p class="text-[11px] text-slate-300 mt-3 px-2 leading-snug">Um guia prático e sem ilusões para quem trabalha duro e quer ver o dinheiro sobrar.</p>
+                  <!-- Mini Orçamento & Carteira -->
+                  <div class="flex items-center justify-around w-full pt-1 border-t border-slate-700/50 text-slate-300 text-xs">
+                    <span class="flex items-center gap-1"><i class="fa-solid fa-calculator text-amber-400"></i> Orçamento</span>
+                    <span class="flex items-center gap-1"><i class="fa-solid fa-wallet text-emerald-400"></i> Reservas</span>
+                  </div>
                 </div>
-                <div class="border-t border-slate-700/60 pt-3">
-                  <span class="text-xs font-bold text-amber-300 uppercase tracking-wider">Lucas Neves</span>
+                
+                <!-- Autor Lucas Neves -->
+                <div class="pt-2 border-t border-[#c98e4d]/40 text-center">
+                  <span class="text-base font-black text-white tracking-wide">Lucas Neves</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Texto de Oferta -->
-          <div class="md:col-span-7 space-y-4 text-center md:text-left">
-            <span class="inline-block px-3 py-1 rounded-full text-xs font-extrabold bg-amber-400 text-slate-950 uppercase tracking-wider">
-              Solução Recomendada
+          <!-- Lado Direito: Copy & Benefícios do Método -->
+          <div class="md:col-span-7 space-y-4 text-left">
+            <span class="inline-block px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-400 text-xs font-bold uppercase tracking-wider">
+              Solução Prática Recomendada
             </span>
-            <h3 class="text-2xl md:text-3xl font-black text-white leading-tight">
-              Aprenda a estancar o sangramento e investir com o guia prático
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+              Você não precisa zerar todas as dívidas para começar a investir.
             </h3>
-            <p class="text-slate-300 text-sm leading-relaxed">
-              No e-book <strong>“Endividado, porém investindo”</strong>, o autor <strong>Lucas Neves</strong> mostra o caminho sem ilusões para quem trabalha duro organizar as contas, acabar com o rotativo do cartão e criar uma reserva de paz.
+            <p class="text-sm text-slate-300 leading-relaxed">
+              O método criado por <strong>Lucas Neves</strong> foi desenvolvido para a realidade de quem enfrenta plantão, rotina pesada e boletos no fim do mês. Aprenda a controlar dívidas, estancar sangramentos de juros e construir sua primeira reserva.
             </p>
 
-            <ul class="text-xs text-slate-300 space-y-2 pt-2">
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                <span>Método prático focado na realidade de quem trabalha e produz</span>
+            <!-- Lista de Benefícios -->
+            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-200">
+              <li class="flex items-start">
+                <i class="fa-solid fa-circle-check text-amber-400 mt-1 mr-2.5"></i>
+                <span><strong>Plano de Ação Cirúrgico:</strong> Como negociar o cartão de crédito e o cheque especial.</span>
               </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                <span>Como entender investimentos do zero (Tesouro Selic e CDBs)</span>
+              <li class="flex items-start">
+                <i class="fa-solid fa-circle-check text-amber-400 mt-1 mr-2.5"></i>
+                <span><strong>Guia do Primeiro Aporte:</strong> Tesouro Selic e CDBs 100% CDI explicados sem economês.</span>
               </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                <span>Workbook com planilhas e exercícios de planejamento financeiro</span>
+              <li class="flex items-start">
+                <i class="fa-solid fa-circle-check text-amber-400 mt-1 mr-2.5"></i>
+                <span><strong>Manual de Sobrevivência:</strong> Como reprimir contratempos sem voltar ao sufoco.</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa-solid fa-circle-check text-amber-400 mt-1 mr-2.5"></i>
+                <span><strong>Workbook Interativo:</strong> Tabelas completas para acompanhar sua evolução mês a mês.</span>
               </li>
             </ul>
 
-            <!-- BOTÃO CLICÁVEL COM REDIRECIONAMENTO KIWIFY -->
+            <!-- Botão CTA Principal Clicável -->
             <div class="pt-4">
-              <button onclick="window.open(CHECKOUT_URL, '_blank')" class="w-full md:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-extrabold text-base shadow-xl shadow-amber-500/25 transition-all duration-300 transform hover:scale-105 cursor-pointer">
-                QUERO O GUIA PRÁTICO AGORA →
+              <button onclick="window.open(CHECKOUT_URL, '_blank')" class="w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-base px-8 py-4 rounded-xl shadow-xl shadow-amber-500/25 transition transform hover:scale-105 active:scale-95 text-center cursor-pointer animate-pulse-subtle">
+                <span>QUERO O GUIA PRÁTICO AGORA</span>
+                <i class="fa-solid fa-arrow-up-right-from-square ml-3"></i>
               </button>
+              <p class="text-[11px] text-slate-400 mt-2">Acesso imediato • Conteúdo 100% prático e sem frescuras</p>
             </div>
           </div>
 
@@ -277,109 +301,207 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="border-t border-slate-900 bg-slate-950 py-6 text-center text-xs text-slate-500">
-    <p>© Endividado, Porém Investindo — Desenvolvido por Lucas Neves.</p>
+  <footer class="w-full border-t border-slate-900 bg-slate-950 py-6 text-center text-xs text-slate-500">
+    <div class="max-w-4xl mx-auto px-4 space-y-2">
+      <p>© <span id="year">2026</span> Endividômetro & E-book "Endividado, porém investindo" por <strong>Lucas Neves</strong>.</p>
+      <p class="text-[11px] text-slate-600">Este teste possui objetivo educativo e orientativo para auxiliar no seu planejamento pessoal.</p>
+    </div>
   </footer>
 
   <!-- SCRIPT LÓGICO DO QUIZ E VELOCÍMETRO -->
   <script>
-    let currentStep = 1;
-    const totalSteps = 4;
+    const quizQuestions = [
+      {
+        title: "Como está a situação das suas faturas ou empréstimos?",
+        subtitle: "Considere cartões de crédito, dívidas bancárias ou pendências familiares.",
+        options: [
+          { label: "Não tenho dívidas ou apenas parcelas normais que cabem com folga no orçamento.", score: 1 },
+          { label: "Tenho parcelamentos em dia, mas o valor mensal toma boa parte do salário.", score: 5 },
+          { label: "Estou usando o rotativo do cartão ou o cheque especial para cobrir as contas.", score: 8 },
+          { label: "Tenho parcelas em atraso, cobranças e perdi o controle dos valores.", score: 10 }
+        ]
+      },
+      {
+        title: "Se surgir um imprevisto urgente hoje, como você reage?",
+        subtitle: "Exemplo: consulta médica, remédio de urgência ou conserto do transporte.",
+        options: [
+          { label: "Tenho uma reserva de emergência guardada e pago sem estresse.", score: 0 },
+          { label: "Consigo absorver ajustando e cortando pequenos gastos do mês.", score: 4 },
+          { label: "Preciso parcelar no cartão ou pedir emprestado a alguém.", score: 8 },
+          { label: "Não tenho de onde tirar, seria o caos absoluto na minha conta.", score: 10 }
+        ]
+      },
+      {
+        title: "Como fica a sua conta bancária por volta do dia 15 ou 20 do mês?",
+        subtitle: "Análise da sobra de dinheiro até o próximo pagamento.",
+        options: [
+          { label: "Sobra margem confortável e separo uma parte para guardar/investir.", score: 0 },
+          { label: "Fica 'no zero a zero'. Não sobra quase nada, mas pago o básico.", score: 5 },
+          { label: "Chego nessa data sem dinheiro e usando o cheque especial.", score: 8 },
+          { label: "Já começo o mês no vermelho pagando juros retroativos acumulados.", score: 10 }
+        ]
+      },
+      {
+        title: "Qual é a sua sensação emocional em relação ao dinheiro hoje?",
+        subtitle: "O peso psicológico da situação financeira na sua rotina.",
+        options: [
+          { label: "Tranquilo. Sinto que tenho controle claro dos meus ganhos e gastos.", score: 0 },
+          { label: "Alerta. Consigo pagar as contas, mas sinto que vivo sem margem.", score: 4 },
+          { label: "Ansioso. Trabalho duro mas sinto que o dinheiro evaporou no meio do mês.", score: 8 },
+          { label: "Exausto. Evito até olhar o saldo da conta para não passar raiva.", score: 10 }
+        ]
+      }
+    ];
 
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const progressBar = document.getElementById('progress-bar');
-    const progressText = document.getElementById('progress-text');
+    let currentQuestion = 0;
+    let userAnswers = [];
 
-    nextBtn.addEventListener('click', () => {
-      const currentRadio = document.querySelector(`.quiz-step[data-step="${currentStep}"] input[type="radio"]:checked`);
+    document.getElementById('year').innerText = new Date().getFullYear();
+
+    function startQuiz() {
+      document.getElementById('hero-section').classList.add('hidden');
+      document.getElementById('quiz-card').classList.remove('hidden');
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const q = quizQuestions[currentQuestion];
       
-      if (!currentRadio) {
-        alert("Por favor, selecione uma opção para avançar.");
+      document.getElementById('question-title').innerText = q.title;
+      document.getElementById('question-subtitle').innerText = q.subtitle;
+      
+      const progressPercent = Math.round(((currentQuestion + 1) / quizQuestions.length) * 100);
+      document.getElementById('progress-step-text').innerText = `Pergunta ${currentQuestion + 1} de ${quizQuestions.length}`;
+      document.getElementById('progress-percent-text').innerText = `${progressPercent}%`;
+      document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+
+      const prevBtn = document.getElementById('prev-btn');
+      if (currentQuestion > 0) {
+        prevBtn.classList.remove('invisible');
+      } else {
+        prevBtn.classList.add('invisible');
+      }
+
+      const container = document.getElementById('options-container');
+      container.innerHTML = '';
+
+      q.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = "option-card w-full text-left p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:bg-slate-800 hover:border-amber-500/50 flex items-center justify-between group cursor-pointer text-slate-200 hover:text-white transition";
+        btn.onclick = () => selectOption(opt.score);
+        
+        btn.innerHTML = `
+          <div class="flex items-center space-x-3 pr-4">
+            <div class="w-7 h-7 rounded-full bg-slate-700 group-hover:bg-amber-500 group-hover:text-slate-950 flex items-center justify-center text-xs font-bold text-slate-300 transition flex-shrink-0">
+              ${String.fromCharCode(65 + index)}
+            </div>
+            <span class="text-sm font-medium leading-snug">${opt.label}</span>
+          </div>
+          <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition text-xs flex-shrink-0"></i>
+        `;
+        container.appendChild(btn);
+      });
+    }
+
+    function selectOption(score) {
+      userAnswers[currentQuestion] = score;
+      
+      if (currentQuestion < quizQuestions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function previousQuestion() {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        renderQuestion();
+      }
+    }
+
+    function finishQuiz() {
+      document.getElementById('quiz-card').classList.add('hidden');
+      document.getElementById('result-card').classList.remove('hidden');
+
+      const totalScore = userAnswers.reduce((acc, curr) => acc + curr, 0);
+      const finalScore = Math.min(10, Math.max(0, Math.round(totalScore / quizQuestions.length)));
+
+      animateGauge(finalScore);
+      renderDiagnosis(finalScore);
+    }
+
+    function animateGauge(score) {
+      const targetDeg = -90 + (score * 18);
+      const needle = document.getElementById('needle');
+      const scoreNumberEl = document.getElementById('score-number');
+
+      setTimeout(() => {
+        needle.style.transform = `rotate(${targetDeg}deg)`;
+      }, 150);
+
+      let currentDisplay = 0;
+      const duration = 1200;
+      const stepTime = Math.abs(Math.floor(duration / (score || 1)));
+      
+      if (score === 0) {
+        scoreNumberEl.innerText = "0";
         return;
       }
 
-      if (currentStep < totalSteps) {
-        document.querySelector(`.quiz-step[data-step="${currentStep}"]`).classList.add('hidden');
-        currentStep++;
-        document.querySelector(`.quiz-step[data-step="${currentStep}"]`).classList.remove('hidden');
-        updateProgress();
-      } else {
-        calculateAndShowResult();
-      }
-    });
-
-    prevBtn.addEventListener('click', () => {
-      if (currentStep > 1) {
-        document.querySelector(`.quiz-step[data-step="${currentStep}"]`).classList.add('hidden');
-        currentStep--;
-        document.querySelector(`.quiz-step[data-step="${currentStep}"]`).classList.remove('hidden');
-        updateProgress();
-      }
-    });
-
-    function updateProgress() {
-      prevBtn.disabled = (currentStep === 1);
-      nextBtn.innerText = (currentStep === totalSteps) ? "Ver Meu Diagnóstico →" : "Próxima Pergunta";
-      progressBar.style.width = `${(currentStep / totalSteps) * 100}%`;
-      progressText.innerText = `Pergunta ${currentStep} de ${totalSteps}`;
+      const timer = setInterval(() => {
+        currentDisplay += 1;
+        scoreNumberEl.innerText = currentDisplay;
+        if (currentDisplay >= score) {
+          clearInterval(timer);
+        }
+      }, stepTime);
     }
 
-    function calculateAndShowResult() {
-      const q1 = parseFloat(document.querySelector('input[name="q1"]:checked').value);
-      const q2 = parseFloat(document.querySelector('input[name="q2"]:checked').value);
-      const q3 = parseFloat(document.querySelector('input[name="q3"]:checked').value);
-      const q4 = parseFloat(document.querySelector('input[name="q4"]:checked').value);
-
-      let score = Math.min(10, Math.max(0, q1 + q2 + q3 + q4));
-      score = Math.round(score * 10) / 10;
-
-      document.getElementById('quiz-container').classList.add('hidden');
-      document.getElementById('hero-section').classList.add('hidden');
-      document.getElementById('result-container').classList.remove('hidden');
-
-      document.getElementById('score-display').innerHTML = `${score} <span class="text-lg font-bold text-slate-500">/ 10</span>`;
-
-      const angle = -90 + (score / 10) * 180;
-      
-      setTimeout(() => {
-        document.getElementById('gauge-pointer').style.transform = `rotate(${angle}deg)`;
-      }, 200);
-
+    function renderDiagnosis(score) {
       const statusBadge = document.getElementById('status-badge');
-      const diagnosisCard = document.getElementById('diagnosis-card');
+      const diagTitle = document.getElementById('diagnosis-title');
+      const diagDesc = document.getElementById('diagnosis-description');
+      const actionAdvice = document.getElementById('action-advice');
 
       if (score <= 4) {
-        statusBadge.className = "inline-block mt-2 px-4 py-1.5 rounded-full font-bold text-sm bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
-        statusBadge.innerText = "Nível Verde (0 a 4) — Finanças Sob Controle";
+        statusBadge.className = "inline-block px-5 py-2 rounded-full font-bold text-sm mb-6 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+        statusBadge.innerHTML = `<i class="fa-solid fa-circle-check mr-1.5"></i> Nível Verde (${score}/10) — Finanças Sob Controle`;
 
-        diagnosisCard.innerHTML = `
-          <h4 class="text-xl font-bold text-emerald-400">Excelente! Suas contas estão estruturadas.</h4>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Você não está no sufoco das dívidas abusivas. O seu grande objetivo agora é acelerar a construção da sua reserva de paz e fazer o seu dinheiro render mais em renda fixa segura.
-          </p>
-        `;
-      } else if (score <= 7) {
-        statusBadge.className = "inline-block mt-2 px-4 py-1.5 rounded-full font-bold text-sm bg-amber-500/20 text-amber-400 border border-amber-500/30";
-        statusBadge.innerText = "Nível Amarelo (5 a 7) — Alerta de Limite";
+        diagTitle.innerHTML = `<i class="fa-solid fa-shield-halved text-emerald-400 mr-2"></i> Diagnóstico: Situação Controlada e Pronta para Crescer`;
+        diagDesc.innerHTML = `Sua rotina financeira está estruturada e você não é refém dos juros abusivos. Seu foco agora é acelerar a construção da sua reserva e começar a aportar regularmente em investimentos seguros.`;
 
-        diagnosisCard.innerHTML = `
-          <h4 class="text-xl font-bold text-amber-400">Atenção! Você está no limite da margem de segurança.</h4>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            As suas contas estão em dia, mas você vive sem folga. Qualquer imprevisto pode te jogar no cheque especial. É hora de eliminar vazamentos invisíveis e começar a guardar pequenos valores para criar fôlego.
-          </p>
-        `;
+        actionAdvice.innerText = "Monte ou fortaleça sua Reserva de Paz no Tesouro Selic ou em um CDB 100% CDI com liquidez diária. Automatize pequenos aportes mensais para manter a constância.";
+
+      } else if (score >= 5 && score <= 7) {
+        statusBadge.className = "inline-block px-5 py-2 rounded-full font-bold text-sm mb-6 bg-amber-500/20 text-amber-400 border border-amber-500/30";
+        statusBadge.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-1.5"></i> Nível Amarelo (${score}/10) — Alerta de Limite`;
+
+        diagTitle.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-400 mr-2"></i> Diagnóstico: Contas em Dia, Mas Sem Margem para Respirar`;
+        diagDesc.innerHTML = `Você consegue honrar os boletos, mas vive no limite. Qualquer imprevisto (saúde, manutenção de veículo) pode te empurrar para o cheque especial ou cartão de crédito.`;
+
+        actionAdvice.innerText = "Identifique seus 'vazamentos invisíveis' para liberar uma folga mensal de R$ 50 a R$ 100 e iniciar imediatamente sua reserva de emergência.";
+
       } else {
-        statusBadge.className = "inline-block mt-2 px-4 py-1.5 rounded-full font-bold text-sm bg-rose-500/20 text-rose-400 border border-rose-500/30";
-        statusBadge.innerText = "Nível Vermelho (8 a 10) — Sufoco e Sangramento";
+        statusBadge.className = "inline-block px-5 py-2 rounded-full font-bold text-sm mb-6 bg-rose-500/20 text-rose-400 border border-rose-500/30";
+        statusBadge.innerHTML = `<i class="fa-solid fa-fire mr-1.5"></i> Nível Vermelho (${score}/10) — Sufoco e Sangramento`;
 
-        diagnosisCard.innerHTML = `
-          <h4 class="text-xl font-bold text-rose-400">Hora de Estancar o Incêndio dos Juros Altos!</h4>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Você está trabalhando duro apenas para pagar juros abusivos de bancos. Mas respire fundo: encarar esse número de frente é o primeiro passo. O foco imediato é renegociar o que está sangrando e retomar a paz mental.
-          </p>
-        `;
+        diagTitle.innerHTML = `<i class="fa-solid fa-fire text-rose-400 mr-2"></i> Diagnóstico: Incêndio nos Juros Altos (Cartão / Cheque Especial)`;
+        diagDesc.innerHTML = `Você está trabalhando duro apenas para alimentar os juros cobrados pelos bancos. O estresse com os boletos tira sua paz mental, mas encarar este número é o primeiro passo para virar o jogo.`;
+
+        actionAdvice.innerText = "Estanque o sangramento com prioridade máxima. Pare de rolar o rotativo, renegocie contratos abusivos e guarde um valor mínimo para sair da postura defensiva.";
       }
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      userAnswers = [];
+      document.getElementById('result-card').classList.add('hidden');
+      document.getElementById('quiz-card').classList.remove('hidden');
+      
+      document.getElementById('needle').style.transform = 'rotate(-90deg)';
+      renderQuestion();
     }
   </script>
 </body>
