@@ -2,7 +2,7 @@
 
 Ferramenta web interativa desenvolvida como página de captura (landing page) e diagnóstico financeiro em tempo real para o e-book e workbook **"Endividado, Porém Investindo"**.
 
-🔗 Clique aqui para testar o Endividômetro (https://seu-usuario.github.io/endividometro/)
+🔗 Clique aqui para testar o Endividômetro (https://lncloudbit.github.io/index.html/)
 
 ---
 
